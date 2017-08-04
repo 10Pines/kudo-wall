@@ -12,6 +12,8 @@ var kudoSchema = new Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
+kudoSchema.index({autor: 1, para: 1, por: 1}, { unique: true, dropDups: true });
+
 var Kudo = mongoose.model('Kudo', kudoSchema);
 
 function sanitizarKudo(unKudo){
@@ -32,19 +34,23 @@ Kudo.armar = function(texto, autor, cb){
       return Math.floor(Math.random()*6);
     };
 
-    var kudo = {
+    var kudoSinImagen = {
         autor: autor,
         para: mensaje.para,
         por: "por " + mensaje.por,
-        imagen: elegirImagen()
     };
 
-    sanitizarKudo(kudo);
+    sanitizarKudo(kudoSinImagen);
 
-    return Kudo.create(kudo, function (err, kudo) {
-      if (err) return next(err);
-      return cb(kudo);
+    var kudo = {};
+    kudo = Object.assign(kudo, kudoSinImagen, {
+      imagen: elegirImagen()
     });
+
+    Kudo.update(kudoSinImagen, { $set: kudo }, {upsert: true}, function (err, raw) {
+      if (err) return next(err);
+    });
+    return cb(kudo);
 };
 
 Kudo.actualizar = function(id, nuevoKudo, cb){
@@ -60,6 +66,10 @@ Kudo.encontrarUltimos = function(cb){
         $gte: ultimaSemana.toDate()
       }
     }, cb);
+}
+
+Kudo.todos = function(cb){
+  return Kudo.find({}, "para", cb)
 }
 
 module.exports = Kudo;
