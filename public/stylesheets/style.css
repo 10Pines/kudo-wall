@@ -5,8 +5,8 @@ body, html {
 }
 
 #main {
-  min-height: calc(100vh - 88px);
   width: 1500px;
+  padding-bottom: 102px;
   margin: auto;
 }
 
@@ -22,8 +22,7 @@ body, html {
 }
 
 footer {
-  position: absolute;
-  right: 0;
+  position: fixed;
   bottom: 0;
   left: 0;
   padding: 1em 0;
