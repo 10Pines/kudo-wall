@@ -2,11 +2,14 @@
   "name": "kudos",
   "version": "0.0.1",
   "private": true,
+  "main": "app",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon --inspect",
+    "local-db": "./mongod",
     "test": "mocha --reporter list"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.5.2",
     "connect": "^3.4.0",
     "errorhandler": "^1.1.1",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "nodemon": "^1.12.1"
   }
 }
