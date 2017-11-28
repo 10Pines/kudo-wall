@@ -1,4 +1,4 @@
-#development
+# Development
 
 Run `yarn dev` to run the kudo-wall.
 You should have a MongoDB service running
