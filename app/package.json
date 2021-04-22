@@ -21,7 +21,7 @@
     "html-entities": "^2.3.2",
     "markdown": "^0.5.0",
     "method-override": "^2.1.2",
-    "moment": "^2.10.6",
+    "moment": "^2.19.3",
     "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "node-emoji": "^1.10.0",
